@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+[data-theme="light"] {
+    --color-bg: #ffffff;
+    --color-text: #090909;
+    --color-border: #d7d1d1;
+    --color-primary: #059473;    /* trust blue (CTA/buttons) */
+    --color-secondary:#666666FF;
+    --color-accent: #f59e0b;     /* highlight gold (sale tags) */
+    --color-success: #16a34a;    /* green (success/add to cart) */
+    --color-danger: #dc2626;     /* red (errors/remove) */
+}
+[data-theme="dark"] {
+    --color-bg: #0f172a;
+    --color-text: #f8fafc;
+    --color-border: #1e293b;
+    --color-primary: #3b82f6;    /* soft blue for buttons */
+    --color-accent: #facc15;     /* golden yellow (products highlights) */
+    --color-success: #22c55e;    /* green for confirmations */
+    --color-danger: #ef4444;     /* bright red for errors/warnings */
+}
+[data-theme="fresh"] {
+    --color-bg: #f9fafb;
+    --color-text: #1b1b1b;
+    --color-border: #d1d5db;
+    --color-primary: #16a34a;    /* leafy green */
+    --color-accent: #fbbf24;     /* sunflower yellow */
+    --color-success: #22c55e;    /* natural success green */
+    --color-danger: #dc2626;     /* red for warnings */
+}
+[data-theme="luxury"] {
+    --color-bg: #121212;
+    --color-text: #f5f5f5;
+    --color-border: #2c2c2c;
+    --color-primary: #d4af37;    /* metallic gold */
+    --color-accent: #9e7b00;     /* dark amber */
+    --color-success: #8bc34a;    /* subtle luxury green */
+    --color-danger: #e53935;     /* ruby red */
+}
+
+.bg-bg        { background-color: var(--color-bg); }
+.bg-primary   { background-color: var(--color-primary); }
+.bg-secondary   { background-color: var(--color-secondary); }
+.bg-accent    { background-color: var(--color-accent); }
+.bg-success   { background-color: var(--color-success); }
+.bg-danger    { background-color: var(--color-danger); }
+.bg-border    { background-color: var(--color-border); }
+
+/* --- Text Colors --- */
+.text-text    { color: var(--color-text); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent  { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-danger  { color: var(--color-danger); }
+
+/* --- Border Colors --- */
+.border-border  { border-color: var(--color-border); }
+.border-primary { border-color: var(--color-primary); }
+.border-accent  { border-color: var(--color-accent); }
+
+/* --- Transitions --- */
+* {
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
