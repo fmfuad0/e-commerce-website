@@ -81,7 +81,7 @@ function ProductsSection(props) {
 
 
     return (
-        <div className={`container py-10 w-full`}>
+        <div className={`container py-10 w-full bg-bg text-text `}>
             <div className={`flex justify-around items-center py-7 border-red-500 border-2 rounded-md`}>
                 <div className={`flex items-center gap-2 text-center`}>
                     <img src={truckIcon} alt="truck icon" className={`rotate-y-180`}/>

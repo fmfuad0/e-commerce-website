@@ -58,7 +58,7 @@ const ViewProduct = () => {
     }, [productId]);
 
     return (
-        <div className="container">
+        <div className="container bg-bg text-text ">
             {!isLoading?
                 <div className={`flex h-full py-10 w-full`}>
 
@@ -165,9 +165,9 @@ const ViewProduct = () => {
                 </div>
                 {tab === 'Description' ?
                     <div
-                        className={`text-black/60 border border-gray-300 tracking-widest rounded-md text-[14px] font-[500] p-10 leading-5`}
+                        className={` bg-bg text-text  border border-gray-300 tracking-widest rounded-md text-[14px] font-[500] p-10 leading-5`}
                     >
-                        <h1 className={`text-lg text-black/90`}>Product Description : </h1>
+                        <h1 className={`text-lg`}>Product Description : </h1>
                         <p className={`text-center my-5`}>The best is yet to come! Give your walls a voice with a framed
                             poster. This aesthethic, optimistic poster will look great in your desk or in an open-space
                             office. Painted wooden frame with passe-partout for more depth. We denounce with righteous
@@ -175,7 +175,7 @@ const ViewProduct = () => {
                             the
                             moment, so blinded by desire that they cannot forese deleniti atque corrupti quos dolores et
                             quas molestias excepturi.</p>
-                        <p className={`font-bold text-black/80 my-2`}>Lorem Ipsum is not simply random text</p>
+                        <p className={`font-bold my-2`}>Lorem Ipsum is not simply random text</p>
                         <p className={`my-4`}>Many desktop publishing packages and web page editors now use Lorem Ipsum
                             as
                             their default model text, and a search for 'lorem ipsum' will uncover many web sites still

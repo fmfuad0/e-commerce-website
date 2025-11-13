@@ -7,7 +7,7 @@ const Orders = () => {
     const { orders } = useCart();
 
     return (
-        <div className="p-6 max-w-4xl mx-auto">
+        <div className="p-6 max-w-4xl bg-bg text-text  mx-auto">
             <h1 className="text-2xl font-semibold mb-4">Your Orders</h1>
             {orders.length === 0 ? (
                 <div className="text-gray-500">No orders yet.</div>

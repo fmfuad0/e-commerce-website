@@ -44,10 +44,10 @@ const PaymentModal = ({ order, paymentMethod, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-60 bg-black/40" onClick={onClose}>
-            <div className="bg-white rounded-lg p-4 w-full max-w-md" onClick={e => e.stopPropagation()}>
+        <div className="fixed bg-bg text-text inset-0 flex items-center justify-center z-60" onClick={onClose}>
+            <div className="rounded-lg p-4 w-full max-w-md" onClick={e => e.stopPropagation()}>
                 <h3 className="text-lg font-semibold mb-2">Complete Payment</h3>
-                <p className="text-sm text-gray-600 mb-4">Order: {order.id} — Amount: ${order.totalPayable.toFixed(2)}</p>
+                <p className="text-sm mb-4">Order: {order.id} — Amount: ${order.totalPayable.toFixed(2)}</p>
 
                 {paymentMethod === "card" && (
                     <div className="space-y-2">
@@ -56,7 +56,7 @@ const PaymentModal = ({ order, paymentMethod, onClose }) => {
                             <input placeholder="MM/YY" className="flex-1 border p-2 rounded" />
                             <input placeholder="CVC" className="w-24 border p-2 rounded" />
                         </div>
-                        <button disabled={loading} onClick={handlePay} className="w-full mt-3 bg-green-600 text-white py-2 rounded">
+                        <button disabled={loading} onClick={handlePay} className="w-full mt-3 py-2 rounded">
                             {loading ? "Processing..." : `Pay $${order.totalPayable.toFixed(2)}`}
                         </button>
                     </div>
@@ -65,7 +65,7 @@ const PaymentModal = ({ order, paymentMethod, onClose }) => {
                 {paymentMethod === "cod" && (
                     <div>
                         <p className="text-sm">You chose Cash on Delivery. Please have the exact amount ready.</p>
-                        <button onClick={() => { markOrderPaid(order.id, { method: "cod" }); toast.success("Order placed (COD)"); onClose(); }} className="w-full mt-3 bg-indigo-600 text-white py-2 rounded">
+                        <button onClick={() => { markOrderPaid(order.id, { method: "cod" }); toast.success("Order placed (COD)"); onClose(); }} className="w-full mt-3 py-2 rounded">
                             Confirm Order (COD)
                         </button>
                     </div>

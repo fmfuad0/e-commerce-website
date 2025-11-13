@@ -7,7 +7,7 @@ function Footer(props) {
     const [checked, setChecked] = useState(false);
     const [loading, setLoading] = useState(false);
     return (
-        <div className="container flex justify-around items-center text-center py-10 border border-border">
+        <div className="container bg-bg text-text flex justify-around items-center text-center py-10 border border-border">
             <div className={'contact text-left flex flex-col gap-5 w-[300px] h-[245px] '} >
                 <h1 className="text-xl text-primary font-semibold"> Contact Us</h1>
 

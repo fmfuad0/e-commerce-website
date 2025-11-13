@@ -7,7 +7,7 @@ import SupportAgentOutlined from '@mui/icons-material/SupportAgentOutlined';
 
 function Policies(props) {
     return (
-        <div className="policies container py-5">
+        <div className="policies bg-bg text-text  container py-5">
             <div className="flex justify-around ">
                 <div className="w-[280px] h-[113px] flex flex-col justify-around group cursor-pointer" >
                     <div className="text-center">

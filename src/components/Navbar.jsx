@@ -8,9 +8,11 @@ import Cart from "./Cart.jsx";
 import Tooltip from '@mui/material/Tooltip';
 import {useCart} from "../contexts/CartContext.jsx";
 import {googleLogout, useGoogleOneTapLogin, } from '@react-oauth/google';
+import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
     const {showCart, setShowCart, cart} = useCart();
+    const navigate = useNavigate();
     useGoogleOneTapLogin({
         onSuccess: codeResponse => console.log(codeResponse),
         onError: codeResponse => console.log(codeResponse),
@@ -21,9 +23,9 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className={`w-full py-5 flex justify-between container`}>
+        <div className={`w-full py-5 bg-bg text-text  flex justify-between container`}>
             <div  className={`w-[30%] text-text `}>
-                <img  src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/logo-1691412328.jpg" alt="logo" />
+                <img  src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/logo-1691412328.jpg" alt="logo" onClick={()=>navigate("/home")} className={`cursor-pointer`}/>
             </div>
             <div className="flex my-auto items-center w-[40%] gap-5  text-text " >
                 <input type={"text"} placeholder={"Search Products Here..."} style={{outline:"none"}} className={`w-full rounded border-border border px-3 py-2`}/>

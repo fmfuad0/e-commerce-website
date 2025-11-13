@@ -13,16 +13,16 @@ const OrderConfirmation = () => {
     }
 
     return (
-        <div className="p-6 max-w-3xl mx-auto">
+        <div className="p-6 max-w-3xl bg-bg text-text  mx-auto">
             <h1 className="text-2xl font-semibold mb-4">Order {order.id}</h1>
-            <p className="text-sm text-gray-600 mb-4">Status: <strong>{order.status}</strong></p>
-            <div className="bg-white p-4 rounded shadow">
+            <p className="text-sm mb-4">Status: <strong>{order.status}</strong></p>
+            <div className=" p-4 rounded shadow">
                 <h3 className="font-medium mb-2">Items</h3>
                 {order.items.map(i => (
                     <div key={i.id} className="flex justify-between py-2 border-b">
                         <div>
                             <div className="font-medium">{i.title}</div>
-                            <div className="text-xs text-gray-500">{i.quantity} × ${i.price.toFixed(2)}</div>
+                            <div className="text-xs ">{i.quantity} × ${i.price.toFixed(2)}</div>
                         </div>
                         <div className="font-semibold">${(i.discountedTotal ?? i.price * i.quantity).toFixed(2)}</div>
                     </div>

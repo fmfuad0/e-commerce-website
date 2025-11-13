@@ -58,11 +58,11 @@ const Checkout = () => {
     };
 
     return (
-        <div className="container w-full mx-auto p-6">
+        <div className="container bg-bg text-text  w-full mx-auto p-6">
             <h1 className="text-2xl font-semibold mb-4">Checkout</h1>
             <div className="grid md:grid-cols-2 gap-6">
                 {/* Left: form */}
-                <div className="bg-white p-4 rounded-lg shadow">
+                <div className=" p-4 rounded-lg shadow">
                     <h3 className="font-medium mb-2">Contact & Shipping</h3>
                     <div className="space-y-3">
                         <input
@@ -129,7 +129,7 @@ const Checkout = () => {
                 </div>
 
                 {/* Right: order summary */}
-                <div className="bg-white p-4 rounded-lg shadow flex flex-col">
+                <div className=" p-4 rounded-lg shadow flex flex-col">
                     <h3 className="font-medium mb-2">Order Summary</h3>
                     <div className="flex-1 space-y-2 overflow-auto max-h-64">
                         {cart.products.map((p) => (
@@ -138,7 +138,7 @@ const Checkout = () => {
                                     <img src={p.thumbnail} alt={p.title} className="w-12 h-12 object-contain rounded" />
                                     <div>
                                         <div className="text-sm font-medium">{p.title}</div>
-                                        <div className="text-xs text-gray-500">{p.quantity} × ${p.price.toFixed(2)}</div>
+                                        <div className="text-xs ">{p.quantity} × ${p.price.toFixed(2)}</div>
                                     </div>
                                 </div>
                                 <div className="text-sm font-semibold">${(p.discountedTotal ?? p.price * p.quantity).toFixed(2)}</div>
@@ -153,11 +153,11 @@ const Checkout = () => {
                         </div>
                         <div className="flex justify-between text-sm">
                             <span>Items Discount</span>
-                            <span className="text-green-600">-${(cart.total - cart.discountedTotal).toFixed(2)}</span>
+                            <span className="   ">-${(cart.total - cart.discountedTotal).toFixed(2)}</span>
                         </div>
                         <div className="flex gap-2 mt-2">
                             <input value={couponCode} onChange={(e) => setCouponCode(e.target.value)} placeholder="Coupon code" className="flex-1 border p-2 rounded" />
-                            <button onClick={applyCoupon} className="bg-gray-800 text-white px-3 rounded">Apply</button>
+                            <button onClick={applyCoupon} className="    text-white px-3 rounded">Apply</button>
                         </div>
 
                         <div className="flex justify-between font-semibold text-lg border-t pt-2">

@@ -23,7 +23,7 @@ const ListProducts = () => {
         };
 
     return (
-        <div className="container px-3 gap-5 flex py-10">
+        <div className="container px-3 gap-5 flex py-10 bg-bg text-text">
             <div className={`border border-border w-[18%] rounded h-full`} >
                 <div className={`text-lg font-semibold px-3 py-3 border-b-1 border-border`}>
                     <FilterAltOutlinedIcon/>

@@ -34,7 +34,7 @@ const ProductGrid = ({category, subCategory}) => {
         getProducts();
     }, [category]);
     return (
-        <div className="w-full ">
+        <div className="w-full  bg-bg text-text ">
             <div className={`flex justify-start`}>
                 { direction==='col' ? <TableRowsIcon className={`border rounded-md `} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> : <Tooltip title={`Table View`} arrow placement={'top'}><TableRowsOutlinedIcon className={`cursor-pointer`} onClick={() => setDirection('col')} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> </Tooltip>}
                 { direction==='row' ? <GridViewRounded className={`border rounded-md `} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> : <Tooltip title={`Grid View`} arrow placement={'top'}><GridViewOutlinedIcon className={`cursor-pointer`}  onClick={() => setDirection('row')} style={{fontSize:"30px", color : "#3D3C3CFF"}}/></Tooltip> }

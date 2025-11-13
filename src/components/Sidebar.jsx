@@ -21,7 +21,7 @@ function Sidebar({visible, setVisible}) {
     })
 
     return (
-        <div className={`${visible? "fixed" : "hidden"} flex justify-between font-[500] tracking-widest text-[13px] z-100 top-0 left-0 w-full h-full `} style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}>
+        <div className={`${visible? "fixed" : "hidden"} bg-bg text-text  flex justify-between font-[500] tracking-widest text-[13px] z-100 top-0 left-0 w-full h-full `} style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}>
             <div className="bg-bg w-80 h-full p-5 overflow-scroll">
                 <div className="flex justify-between items-center p-2 mb-2 border-b-1 border-border fixed top-0 bg-bg w-70">
                     <h1 className={`text-md text-center font-semibold`}> - CATEGORIES -</h1>

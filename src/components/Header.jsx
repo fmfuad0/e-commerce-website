@@ -1,10 +1,11 @@
 import '../App.css'
 import {useNavigate} from "react-router-dom";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 const Header = ()=>{
     const navigate = useNavigate();
     return (
-        <div className={`container text-text flex w-full`}>
+        <div className={`container  bg-bg text-text  flex w-full`}>
             <p className={`w-[60%] inline-block py-2 text-primary text-sm font-[600]`}>Get up to <span className={`text-red-600 text-lg`}>[50%]</span> off this winter | Limited time offer.</p>
             <div className={`w-[40%] flex justify-end `}>
                 <div className={`my-auto text-[13px] flex justify-end`}>
@@ -22,9 +23,11 @@ const Header = ()=>{
                         <option className={`font-[500]`}>BDT</option>
                         <option className={`font-[500]`}>RUS</option>
                     </select>
+                </div>
+                <div className={`px-5 my-auto`}>
+                    <ThemeToggle/>
 
                 </div>
-
             </div>
         </div>
     )

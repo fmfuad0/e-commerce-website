@@ -6,7 +6,7 @@ import Policies from "../components/Policies.jsx";
 export default function Home() {
 
     return (
-        <div id={'home'}>
+        <div id={'home bg-bg text-text '}>
             <Hero/>
             <ProductsSection/>
             <Policies/>

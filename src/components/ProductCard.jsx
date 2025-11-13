@@ -35,7 +35,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
 
     return (
         <div
-            className={`${direction==='row'? "w-[233px] h-fit" : " w-full h-fit flex"} my-1  py-3 border border-border mx-auto relative overflow-hidden cursor-pointer` }
+            className={`${direction==='row'? "w-[233px] h-fit" : " w-full h-fit flex"} my-1  py-3 border border-border mx-auto relative overflow-hidden cursor-pointer bg-bg text-text ` }
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onClick={()=>{
@@ -91,14 +91,14 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 {/* --- Discount and New Tags with Slide-in Animation --- */}
                 <div
                     id="discount-tag"
-                    className="bg-[#ef2d2d] absolute top-3 left-2 w-[55px] text-white text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
+                    className=" absolute top-3 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
                 >
                     {product.discountPercentage}%
                 </div>
 
                 <div
                     id="new_tag"
-                    className={`smooth-transition bg-[#44b367] absolute top-10 left-2 w-[55px] text-white text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out transform
+                    className={`smooth-transition absolute top-10 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out transform
                     ${hovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'}`
                 }
                 >
@@ -143,19 +143,19 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
 
             {/* --- Product Info --- */}
             <div className="px-2 flex flex-col gap-1 mt-1">
-                <h1 className="text-gray-500 w-full h-[30px] items-end flex hover:text-[var(--color-primary)] cursor-pointer font-semibold text-xs">
+                <h1 className=" w-full h-[30px] items-end flex hover:text-[var(--color-primary)] cursor-pointer font-semibold text-xs">
                     {product.brand}
                 </h1>
-                <h1 className="font-[600] h-[30px] text-gray-800 w-full flex items-center text-sm">{product.title}</h1>
+                <h1 className="font-[600] h-[30px] w-full flex items-center text-sm">{product.title}</h1>
                     <div className="flex flex-row w-full items-start">
                         <Rating defaultValue={product.rating} readOnly precision={0.5} />
                     </div>
-                {direction==='col' && <div className="flex text-sm flex-row w-full max-w-[85%] text-gray-700 items-start">
+                {direction==='col' && <div className="flex text-sm flex-row w-full max-w-[85%] items-start">
                     {product.description}
                 </div>}
 
                 <div className="flex gap-2 w-full flex-row">
-                    <h1 className="font-semibold text-sm text-gray-500 line-through text-center">
+                    <h1 className="font-semibold text-sm  line-through text-center">
                         ${((product.price * product.discountPercentage / 100) + product.price).toFixed(2)}
                     </h1>
                     <h1 className="font-semibold w-full text-sm text-primary">

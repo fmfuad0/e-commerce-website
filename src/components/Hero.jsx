@@ -83,7 +83,7 @@ function Hero() {
     );
 
     return (
-        <div className={`container bg-[#f5f5f5f7] py-10`}>
+        <div className={`container  bg-bg text-text  py-10`}>
             <div className=" w-full mx-auto flex justify-between overflow-hidden rounded-lg">
                 {/* Carousel Section */}
                 <div
