@@ -1,139 +1,166 @@
-import React, {useEffect} from 'react';
-import {selectedProductContext} from "../contexts/ProductContext.jsx";
-import {Rating} from "@mui/material";
-import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
-import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
-import CompareOutlinedIcon from '@mui/icons-material/CompareOutlined';
+import React, { useEffect, useState, useRef } from "react";
+import { Rating } from "@mui/material";
+import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
+import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
+import CompareOutlinedIcon from "@mui/icons-material/CompareOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import Button from '@mui/material/Button';
-import Reviews from '../components/Reviews.jsx';
-import {ArrowForwardIos} from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import Reviews from "../components/Reviews.jsx";
+import { ArrowForwardIos } from "@mui/icons-material";
 import Carousel from "react-multi-carousel";
-import {latestProducts} from "../assets/resources/products/products.js";
+import "react-multi-carousel/lib/styles.css";
+import { latestProducts } from "../assets/resources/products/products.js";
 import ProductCard from "../components/ProductCard.jsx";
-
+import { useCart } from "../contexts/CartContext.jsx";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ViewProduct = () => {
-    const {product, isLoading, setIsLoading} = selectedProductContext();
-    const [count, setCount] = React.useState(1);
-    const [tab, setTab] = React.useState('Description');
-    const [mainImage, setMainImage] = React.useState(product.thumbnail);
-    const carouselRef = React.useRef(null);
-    const carouselRef2 = React.useRef(null);
-    const [similarProducts, setSimilarProducts] = React.useState([]);
+    const { productId } = useParams();
+    const { addToCart } = useCart();
+    const [product, setProduct] = useState({});
+    const [similarProducts, setSimilarProducts] = useState([]);
+    const [mainImage, setMainImage] = useState("");
+    const [count, setCount] = useState(1);
+    const [tab, setTab] = useState("Description");
+    const [isLoading, setIsLoading] = useState(true);
+    const carouselRef = useRef(null);
+    const carouselRef2 = useRef(null);
     const responsive = {
         desktop: { breakpoint: { max: 3000, min: 1024 }, items: 6 },
-        tablet: { breakpoint: { max: 1024, min: 464 }, items: 1 },
+        tablet: { breakpoint: { max: 1024, min: 464 }, items: 3 },
         mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
     };
 
-    useEffect(()=>{
-        const getProducts = async () => {
-            const res = await fetch(`https://dummyjson.com/products/category/${product.category}`);
-            const data = await res.json();
-            setSimilarProducts(data.products);
-            setMainImage(product.thumbnail);
-        }
-        getProducts();
-        scrollTo(0, 0)
-    }, [product])
-    console.log(similarProducts)
-    console.log(product.category)
+    if(!product)return null;
+    // Fetch product
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await fetch(`https://dummyjson.com/products/${productId}`);
+                const data = await res.json();
+                setProduct(data);
+                console.log(data);
+                setMainImage(data.thumbnail);
+                const simRes = await fetch(
+                    `https://dummyjson.com/products/category/${data.category}`
+                );
+                const simData = await simRes.json();
+                setSimilarProducts(simData.products || []);
+            } catch (err) {
+                console.error("Error loading product:", err);
+            }
+
+        };
+
+        getProduct();
+        window.scrollTo(0, 0);
+        setTimeout(()=>setIsLoading(false), 1000);
+    }, [productId]);
 
     return (
         <div className="container">
             {!isLoading?
                 <div className={`flex h-full py-10 w-full`}>
-                <div className={`flex flex-col gap-5 my-10 px-5 items-center justify-start`}>
-                    {product.images.map(image => (
-                        <img src={image} alt="" className={`w-30 border border-gray-300 ${mainImage===image? "border-accent" : ""}`} onClick={() => setMainImage(image)} />
-                    ))}
-                </div>
-                <div className={`flex items-start justify-between gap-7`}>
-                    <div className={`w-180 h-120 border-gray-300 border rounded-md bg-no-repeat bg-contain`}>
-                        <img src={mainImage} className={`w-full h-full`} alt={''}/>
+
+                    <div className={`flex flex-col gap-5 my-10 px-5 items-center justify-start`}>
+                        {product.images.map(image => (
+                            <img src={image} alt=""
+                                 className={`w-30 border border-gray-300 ${mainImage === image ? "border-accent" : ""}`}
+                                 onClick={() => setMainImage(image)}/>
+                        ))}
                     </div>
-                    <div className={`flex flex-col gap-2 px-5 justify-start`}>
-                        <div className={`flex flex-col gap-2 border-b-1 border-b-gray-300 pb-2`}>
-                            <Rating defaultValue={product.rating} readOnly precision={0.5}/>
-                            <h1 className={`text-2xl font-[500]`}>{product.title}</h1>
-                            <p className="text-sm font-[500] text-gray-700 w-[80%] leading-7">{product.description}</p>
+                    <div className={`flex items-start justify-between gap-7`}>
+                        <div className={`w-180 h-120 border-gray-300 border rounded-md bg-no-repeat bg-contain`}>
+                            <img src={mainImage} className={`w-full h-full`} alt={''}/>
                         </div>
-                        <div className={`flex flex-col text-[14px] gap-1 pb-2 tracking-wider`}>
+                        <div className={`flex flex-col gap-2 px-5 justify-start`}>
+                            <div className={`flex flex-col gap-2 border-b-1 border-b-gray-300 pb-2`}>
+                                <Rating defaultValue={product.rating} readOnly precision={0.5}/>
+                                <h1 className={`text-2xl font-[500]`}>{product.title}</h1>
+                                <p className="text-sm font-[500] text-gray-700 w-[80%] leading-7">{product.description}</p>
+                            </div>
+                            <div className={`flex flex-col text-[14px] gap-1 pb-2 tracking-wider`}>
                             <span className={`flex`}>
                                 <span className={`font-[500]`}>Brand :</span><h1 className={`ml-1`}>{product.brand}</h1>
                             </span>
-                            <span className={`flex`}>
+                                <span className={`flex`}>
                                 <span className={`font-[500]`}>Availability :</span><h1
-                                className={`ml-1`}>{product.availabilityStatus}</h1>
+                                    className={`ml-1`}>{product.availabilityStatus}</h1>
                             </span>
-                            <span className={`flex`}>
+                                <span className={`flex`}>
                                 <span className={`font-[500]`}>Warranty :</span><h1
-                                className={`ml-1`}>{product.warrantyInformation}</h1>
+                                    className={`ml-1`}>{product.warrantyInformation}</h1>
                             </span>
-                            <span className={`flex`}>
+                                <span className={`flex`}>
                                 <span className={`font-[500]`}>Shipping  :</span><h1
-                                className={`ml-1`}>{product.shippingInformation}</h1>
+                                    className={`ml-1`}>{product.shippingInformation}</h1>
                             </span>
-                            <span className={`flex`}>
+                                <span className={`flex`}>
                                 <span className={`font-[500]`}>Return Policy  :</span><h1
-                                className={`ml-1`}>{product.returnPolicy}</h1>
+                                    className={`ml-1`}>{product.returnPolicy}</h1>
                             </span>
-                            <h1 className={`font-[600] mt-2`}>Hurry up ! Only <span
-                                className={`text-red-500`}>{product.stock}</span> items left...</h1>
-                            <div className={`bg-gray-300 w-[50%] mb-2`}>
-                                <div className={`bg-green-500 py-1 rounded-full`}
-                                     style={{width: product.stock.toString() + '%'}}></div>
-                            </div>
-                            <span
-                                className={`text-3xl font-semibold text-[var(--color-primary)] tracking-wide`}>${product.price}</span>
-                            <span className={`font-semibold text-gray-500 tracking-widest`}>Instead of <span
-                                className={`text-red-500 line-through`}>${product.price + product.discountPercentage}</span></span>
-                            <div className={`flex justify-start gap-3 mt-2`}>
-                                <div className={`flex items-center justify-center border border-gray-500`}>
-                                    <div className={`font-[500] w-10 text-center`}>{count}</div>
-                                    <div className={`flex flex-col border-l-1 border-gray-500`}>
-                                        <ArrowDropUpOutlinedIcon
-                                            className={`border-b-gray-500 border-b-1 cursor-pointer active:bg-[var(--color-primary)]`}
-                                            onClick={() => setCount(count + 1)}/>
-                                        <ArrowDropDownOutlinedIcon
-                                            className={` cursor-pointer active:bg-[var(--color-primary)]`}
-                                            onClick={() => setCount(count > 1 ? count - 1 : 1)}/>
+                                <h1 className={`font-[600] mt-2`}>Hurry up ! Only <span
+                                    className={`text-red-500`}>{product.stock}</span> items left...</h1>
+                                <div className={`bg-gray-300 w-[50%] mb-2`}>
+                                    <div className={`bg-green-500 py-1 rounded-full`}
+                                         style={{width: product.stock.toString() + '%'}}></div>
+                                </div>
+                                <span
+                                    className={`text-3xl font-semibold text-[var(--color-primary)] tracking-wide`}>${product.price}</span>
+                                <span className={`font-semibold text-gray-500 tracking-widest`}>Instead of <span
+                                    className={`text-red-500 line-through`}>${product.price + product.discountPercentage}</span></span>
+                                <div className={`flex justify-start gap-3 mt-2`}>
+                                    <div className={`flex items-center justify-center border border-gray-500`}>
+                                        <div className={`font-[500] w-10 text-center`}>{count}</div>
+                                        <div className={`flex flex-col border-l-1 border-gray-500`}>
+                                            <ArrowDropUpOutlinedIcon
+                                                className={`border-b-gray-500 border-b-1 cursor-pointer active:bg-[var(--color-primary)]`}
+                                                onClick={() => setCount(count + 1)}/>
+                                            <ArrowDropDownOutlinedIcon
+                                                className={` cursor-pointer active:bg-[var(--color-primary)]`}
+                                                onClick={() => setCount(count > 1 ? count - 1 : 1)}/>
+                                        </div>
                                     </div>
+                                    <Button
+                                        sx={{
+                                            backgroundColor: 'var(--color-primary)', color: 'white',
+                                            padding: '0 50px',
+                                            letterSpacing: '1.5px',
+                                            ":hover": {backgroundColor: 'black'}
+                                        }}
+                                        title={'Add to Cart'}
+                                        onClick={() => {
+                                            addToCart(product, count);
+                                            setCount(1)
+                                        }}
+
+                                    >Add To Cart</Button>
                                 </div>
-                                <Button sx={{
-                                    backgroundColor: 'var(--color-primary)',
-                                    color: 'white',
-                                    padding: '0 50px',
-                                    letterSpacing: '1.5px',
-                                    ":hover": {backgroundColor: 'black'}
-                                }} title={'Add to Cart'}>Add To Cart</Button>
-                            </div>
-                            <div className={`flex items-center gap-5 my-2`}>
-                                <div
-                                    className={` bg-[var(--color-primary)]/20 cursor-pointer flex justify-around items-center text-[12px] font-[500] tracking-widest hover:bg-[var(--color-primary)]/40 px-2 py-1 rounded-md`}>
-                                    <FavoriteBorderIcon/> Add to wishlist
-                                </div>
-                                <div
-                                    className={` bg-[var(--color-primary)]/20 cursor-pointer flex justify-around items-center text-[12px] font-[500] tracking-widest hover:bg-[var(--color-primary)]/40 px-2 py-1 rounded-md`}>
-                                    <CompareOutlinedIcon/> Add to compare
+                                <div className={`flex items-center gap-5 my-2`}>
+                                    <div
+                                        className={` bg-[var(--color-primary)]/20 cursor-pointer flex justify-around items-center text-[12px] font-[500] tracking-widest hover:bg-[var(--color-primary)]/40 px-2 py-1 rounded-md`}>
+                                        <FavoriteBorderIcon/> Add to wishlist
+                                    </div>
+                                    <div
+                                        className={` bg-[var(--color-primary)]/20 cursor-pointer flex justify-around items-center text-[12px] font-[500] tracking-widest hover:bg-[var(--color-primary)]/40 px-2 py-1 rounded-md`}>
+                                        <CompareOutlinedIcon/> Add to compare
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> :
+                </div> :
                 <div className={`loader mx-auto`}></div>
             }
-            {!isLoading?
+            {!isLoading ?
                 <div className="flex flex-col gap-5">
-                <div
-                    className={`flex py-7 gap-5 text-lg font-semibold text-gray-500 px-10 tracking-wider  items-center justify-start border border-gray-300`}>
+                    <div
+                        className={`flex py-7 gap-5 text-lg font-semibold text-gray-500 px-10 tracking-wider  items-center justify-start border border-gray-300`}>
                     <span
                         className={`${tab === 'Description' ? "text-[var(--color-primary)] border-b-1" : ""}  cursor-pointer`}
                         onClick={() => setTab('Description')}>Description</span>
-                    <span
-                        className={`${tab === 'Reviews' ? "text-[var(--color-primary)] border-b-1" : ""}  cursor-pointer`}
+                        <span
+                            className={`${tab === 'Reviews' ? "text-[var(--color-primary)] border-b-1" : ""}  cursor-pointer`}
                         onClick={() => setTab('Reviews')}>Reviews</span>
                 </div>
                 {tab === 'Description' ?

@@ -1,13 +1,15 @@
 import '../App.css'
+import {useNavigate} from "react-router-dom";
 
 const Header = ()=>{
+    const navigate = useNavigate();
     return (
         <div className={`container text-text flex w-full`}>
             <p className={`w-[60%] inline-block py-2 text-primary text-sm font-[600]`}>Get up to <span className={`text-red-600 text-lg`}>[50%]</span> off this winter | Limited time offer.</p>
             <div className={`w-[40%] flex justify-end `}>
                 <div className={`my-auto text-[13px] flex justify-end`}>
                     <a className={`font-[500] px-3 hover:text-[var(--color-primary)] cursor-pointer border-r-1`}>Help Center</a>
-                    <a className={`font-[450] px-3 hover:text-[var(--color-primary)] cursor-pointer`}>Order Tracking</a>
+                    <a className={`font-[450] px-3 hover:text-[var(--color-primary)] cursor-pointer`} onClick={()=>navigate('/orders')}>Order Tracking</a>
                 </div>
                 <div className={`my-auto text-[13px] text-text`}>
                     <select >

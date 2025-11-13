@@ -43,7 +43,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 setProduct(product);
                 setTimeout(()=>{
                     setIsLoading(false)
-                    navigate('/products');
+                    navigate(`/products/${product.id}`);
                 }, Math.random() * 1500)
             }}
         >

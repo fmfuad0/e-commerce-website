@@ -7,27 +7,40 @@ import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
 import ListProducts from "./pages/ListProducts.jsx";
 import ViewProduct from "./pages/ViewProduct.jsx";
 import {ProductContextProvider} from "./contexts/ProductContext.jsx";
+import Cart from "./components/Cart.jsx";
+import {CartProvider} from "./contexts/CartContext.jsx";
+import Orders from "./components/Orders.jsx";
+import OrderConfirmation from "./components/OrderConfirmation.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import {GoogleOAuthProvider} from "@react-oauth/google";
 
 export default function App() {
     return (
-        <ThemeProvider>
-            <ProductContextProvider>
-                <BrowserRouter>
-                    <Layout>
-                        <Routes>
-                            <Route path="/" element={<Navigate to="/home" replace />} />
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/list-products/:parent" element={<ListProducts/>} />
-                            <Route path="/list-products/:parent/:category" element={<ListProducts/>} />
-                            <Route path="/list-products/:parent/:category/:subcategory" element={<ListProducts />} />
-                            <Route path="/products" element={<ViewProduct />} />
-                            <Route path="/products/:productId" element={<ViewProduct />} />
-                            <Route path="/contact" element={<span>Contact</span>} />
-                            {/*<Route path="/products" element={<span>Products</span>} />*/}
-                        </Routes>
-                    </Layout>
-                </BrowserRouter>
-            </ProductContextProvider>
-        </ThemeProvider>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+            <ThemeProvider>
+                <CartProvider>
+                    <ProductContextProvider>
+                        <BrowserRouter>
+                            <Layout>
+                                <Routes>
+                                    <Route path="/" element={<Navigate to="/home" replace />} />
+                                    <Route path="/home" element={<Home />} />
+                                    <Route path="/list-products/:parent" element={<ListProducts/>} />
+                                    <Route path="/list-products/:parent/:category" element={<ListProducts/>} />
+                                    <Route path="/list-products/:parent/:category/:subcategory" element={<ListProducts />} />
+                                    <Route path="/products" element={<h1 className={`text-center my-10`}> Invalid Product Id</h1>} />
+                                    <Route path="/products/:productId" element={<ViewProduct />} />
+                                    <Route path="/cart" element={<Cart/>} />
+                                    <Route path="/checkout" element={<Checkout />} />
+                                    <Route path="/orders" element={<Orders />} />
+                                    <Route path="/orders/:id" element={<OrderConfirmation />} />
+                                    {/*<Route path="/products" element={<span>Products</span>} />*/}
+                                </Routes>
+                            </Layout>
+                        </BrowserRouter>
+                    </ProductContextProvider>
+                </CartProvider>
+            </ThemeProvider>
+        </GoogleOAuthProvider>
     );
 }

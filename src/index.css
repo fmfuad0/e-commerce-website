@@ -12,8 +12,8 @@ body{
 
 .container{
   max-width: 100%;
-  padding-right: 4rem;
-  padding-left: 4rem;
+  padding-right: 8rem;
+  padding-left: 8rem;
 }
 .smooth-transition{
   transition: ease-in 0.1s;
