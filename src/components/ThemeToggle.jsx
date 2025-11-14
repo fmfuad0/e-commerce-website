@@ -7,11 +7,11 @@ const ThemeToggle = () => {
 
     return (
         <div className="flex items-center gap-2">
-            <span className="font-medium">Theme:</span>
+            <span className="text-sm">Theme:</span>
             <select
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}
-                className="border border-border bg-bg text-text rounded-md px-3 py-2 focus:outline-none"
+                className="border border-primary bg-bg text-text rounded-md px-1 focus:outline-none"
             >
                 {themes.map((t) => (
                     <option key={t} value={t}>

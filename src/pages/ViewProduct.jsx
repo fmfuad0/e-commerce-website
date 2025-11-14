@@ -49,7 +49,6 @@ const ViewProduct = () => {
             } catch (err) {
                 console.error("Error loading product:", err);
             }
-
         };
 
         getProduct();
@@ -108,7 +107,7 @@ const ViewProduct = () => {
                                 <span
                                     className={`text-3xl font-semibold text-[var(--color-primary)] tracking-wide`}>${product.price}</span>
                                 <span className={`font-semibold text-gray-500 tracking-widest`}>Instead of <span
-                                    className={`text-red-500 line-through`}>${product.price + product.discountPercentage}</span></span>
+                                    className={`text-red-500 line-through`}>${(product.price + product.discountPercentage)}</span></span>
                                 <div className={`flex justify-start gap-3 mt-2`}>
                                     <div className={`flex items-center justify-center border border-gray-500`}>
                                         <div className={`font-[500] w-10 text-center`}>{count}</div>

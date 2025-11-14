@@ -6,20 +6,18 @@ import Home from "./pages/Home.jsx";
 import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
 import ListProducts from "./pages/ListProducts.jsx";
 import ViewProduct from "./pages/ViewProduct.jsx";
-import {ProductContextProvider} from "./contexts/ProductContext.jsx";
 import Cart from "./components/Cart.jsx";
 import {CartProvider} from "./contexts/CartContext.jsx";
 import Orders from "./components/Orders.jsx";
 import OrderConfirmation from "./components/OrderConfirmation.jsx";
 import Checkout from "./pages/Checkout.jsx";
-import {GoogleOAuthProvider} from "@react-oauth/google";
+import {AuthProvider} from "./contexts/AuthContext.jsx";
 
 export default function App() {
     return (
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <AuthProvider >
             <ThemeProvider>
                 <CartProvider>
-                    <ProductContextProvider>
                         <BrowserRouter>
                             <Layout>
                                 <Routes>
@@ -38,9 +36,8 @@ export default function App() {
                                 </Routes>
                             </Layout>
                         </BrowserRouter>
-                    </ProductContextProvider>
                 </CartProvider>
             </ThemeProvider>
-        </GoogleOAuthProvider>
+        </AuthProvider>
     );
 }

@@ -4,7 +4,6 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {Button, Rating, Tooltip} from "@mui/material";
-import {selectedProductContext} from "../contexts/ProductContext.jsx";
 import {useNavigate} from "react-router-dom";
 
 
@@ -20,7 +19,6 @@ const colors = [
 ]
 const  ProductCard = ({ product, direction, setIsLoading })=> {
     const [hovered, setHovered] = useState(false);
-    const {setProduct} = selectedProductContext();
     const navigate = useNavigate();
     const randomColor = useMemo(() => {
         return colors[Math.floor(Math.random() * colors.length)];
@@ -40,7 +38,6 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
             onMouseLeave={() => setHovered(false)}
             onClick={()=>{
                 setIsLoading(true);
-                setProduct(product);
                 setTimeout(()=>{
                     setIsLoading(false)
                     navigate(`/products/${product.id}`);
@@ -91,14 +88,14 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 {/* --- Discount and New Tags with Slide-in Animation --- */}
                 <div
                     id="discount-tag"
-                    className=" absolute top-3 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
+                    className=" absolute bg-red-500 top-3 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
                 >
                     {product.discountPercentage}%
                 </div>
 
                 <div
                     id="new_tag"
-                    className={`smooth-transition absolute top-10 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out transform
+                    className={`bg-green-600 text-gray-100 tracking-widest smooth-transition absolute top-10 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out transform
                     ${hovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'}`
                 }
                 >
@@ -148,7 +145,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 </h1>
                 <h1 className="font-[600] h-[30px] w-full flex items-center text-sm">{product.title}</h1>
                     <div className="flex flex-row w-full items-start">
-                        <Rating defaultValue={product.rating} readOnly precision={0.5} />
+                        <Rating value={product.rating} readOnly precision={0.5} />
                     </div>
                 {direction==='col' && <div className="flex text-sm flex-row w-full max-w-[85%] items-start">
                     {product.description}

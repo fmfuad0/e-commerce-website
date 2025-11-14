@@ -9,6 +9,7 @@ import ProductGrid from "../components/ProductGrid.jsx";
 const ListProducts = () => {
     const { parent, category, subcategory } = useParams();
     const [priceFilterValue, setPriceFilterValue] = React.useState([0, 5000000]);
+    const [isLoading, setIsLoading] = React.useState(false);
     const searchCategory = (!category && !subcategory) ? parent.toLowerCase()==='fashion' ? ['beauty', 'mens-shirts', 'sunglasses', 'mens-watches' ,'womens-watches', "womens-dresses", "skin-care", "fragrances", ] : ['smartphones', 'laptops', 'mobile-accessories', 'tablets'] : subcategory? category==='accessories'? 'mobile-accessories' : [subcategory] : category.toLowerCase()==='apparel' ? ['beauty', 'mens-shirts', 'sunglasses', 'mens-watches' ,'womens-watches', "womens-dresses", "skin-care", "fragrances", ] : category.toLowerCase()==='outerwear' ? ['mens-shirts', "womens-dresses", "tops", "womens-jewelery", ] : category.toLowerCase()==='footwear' ? ['mens-shoes' ,'womens-shoes'] : [category.toLowerCase()]
     console.log(category, subcategory);
 
@@ -113,7 +114,7 @@ const ListProducts = () => {
             <div className={`w-full px-5`}>
                 <h1 className={`font-[500] text-[25px] mb-2 tracking-wide`}>{category?.replace(category[0], category[0].toUpperCase()) || parent.replace(parent[0], parent[0].toUpperCase())}</h1>
                 <p className={`mb-3 text-sm w-[80%] leading-7`}>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their.Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their.</p>
-                <ProductGrid category={searchCategory} />
+                <ProductGrid category={searchCategory} setIsLoading={setIsLoading} />
             </div >
         </div>
     );

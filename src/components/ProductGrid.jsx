@@ -5,13 +5,13 @@ import GridViewRounded from '@mui/icons-material/GridViewRounded'
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import TableRowsOutlinedIcon from '@mui/icons-material/TableRowsOutlined';
 import Tooltip from '@mui/material/Tooltip';
-import {selectedProductContext} from "../contexts/ProductContext.jsx";
 
 const ProductGrid = ({category, subCategory}) => {
     const [products, setProducts] = useState([]);
-    const [direction, setDirection] = useState('col');
+    const [direction, setDirection] = useState('row');
     const [loader, setLoader] = useState(false);
-    const {setIsLoading} = selectedProductContext()
+    const [isLoading, setIsLoading] = React.useState(false);
+
     useEffect(() => {
         const getProducts = async () => {
             setLoader(true);
@@ -34,10 +34,10 @@ const ProductGrid = ({category, subCategory}) => {
         getProducts();
     }, [category]);
     return (
-        <div className="w-full  bg-bg text-text ">
-            <div className={`flex justify-start`}>
-                { direction==='col' ? <TableRowsIcon className={`border rounded-md `} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> : <Tooltip title={`Table View`} arrow placement={'top'}><TableRowsOutlinedIcon className={`cursor-pointer`} onClick={() => setDirection('col')} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> </Tooltip>}
-                { direction==='row' ? <GridViewRounded className={`border rounded-md `} style={{fontSize:"30px", color : "#3D3C3CFF"}}/> : <Tooltip title={`Grid View`} arrow placement={'top'}><GridViewOutlinedIcon className={`cursor-pointer`}  onClick={() => setDirection('row')} style={{fontSize:"30px", color : "#3D3C3CFF"}}/></Tooltip> }
+        <div className="w-full bg-bg text-text ">
+            <div className={`flex justify-start gap-1 border inline-block rounded-md p-1`}>
+                { direction==='col' ? <TableRowsIcon className={`border rounded-md `} style={{fontSize:"30px"}}/> : <Tooltip title={`Table View`} arrow placement={'top'}><TableRowsOutlinedIcon className={`cursor-pointer`} onClick={() => setDirection('col')} style={{fontSize:"30px"}}/> </Tooltip>}
+                { direction==='row' ? <GridViewRounded className={`border rounded-md `} style={{fontSize:"30px"}}/> : <Tooltip title={`Grid View`} arrow placement={'top'}><GridViewOutlinedIcon className={`cursor-pointer`}  onClick={() => setDirection('row')} style={{fontSize:"30px"}}/></Tooltip> }
             </div>
             <div className={`${direction === 'row' ? 'flex-wrap flex' : ''}`}>
 

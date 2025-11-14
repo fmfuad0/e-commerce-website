@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import truckIcon from '../assets/delivery_truck_speed.png';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import cmsBanner1 from '../assets/cms-banner-1.jpg';
 import cmsBanner2 from '../assets/cms-banner-2.jpg';
 import cmsBanner3 from '../assets/cms-banner-3.jpg';
@@ -19,7 +19,6 @@ import {featuredProducts, latestProducts} from "../assets/resources/products/pro
 import Carousel from "react-multi-carousel";
 import {ArrowForwardIos} from "@mui/icons-material";
 import Banner from "./Banner.jsx";
-import {selectedProductContext} from "../contexts/ProductContext.jsx";
 function ProductsSection(props) {
 
     const categories = ['beauty' ,
@@ -49,8 +48,7 @@ function ProductsSection(props) {
     ]
     const [selectedCategory, setSelectedCategory] = useState('mobile-accessories');
     const [products, setProducts] = useState([]);
-    const {setIsLoading} = selectedProductContext();
-
+    const [isLoading, setIsLoading] = useState(false);
     const carouselRef = useRef();
     const carouselRef2 = useRef();
     const carouselRef3 = useRef();
@@ -84,7 +82,7 @@ function ProductsSection(props) {
         <div className={`container py-10 w-full bg-bg text-text `}>
             <div className={`flex justify-around items-center py-7 border-red-500 border-2 rounded-md`}>
                 <div className={`flex items-center gap-2 text-center`}>
-                    <img src={truckIcon} alt="truck icon" className={`rotate-y-180`}/>
+                    <LocalShippingOutlinedIcon  fontSize={'large'} style={{color: 'var(--color-primary)'}} className={`rotate-y-180`} />
                     <strong className={`text-2xl tracking-widest`}>FREE SHIPPING</strong>
 
                 </div>
@@ -131,13 +129,13 @@ function ProductsSection(props) {
                     {/* CONTROL BUTTONS */}
                     <div className="flex gap-2 ">
                         <button
-                            className="bg-white border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-white hover:bg-[var(--color-primary)] "
+                            className=" border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-black hover:bg-[var(--color-primary)] "
                             onClick={() => carouselRef.current.previous()}
                         >
                             <ArrowForwardIos  fontSize="inherit" />
                         </button>
                         <button
-                            className="bg-white border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-white hover:bg-[var(--color-primary)]"
+                            className=" border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-black hover:bg-[var(--color-primary)]"
                             onClick={() => carouselRef.current.next()}
                         >
                             <ArrowForwardIos fontSize="inherit" />
@@ -179,13 +177,13 @@ function ProductsSection(props) {
                     </div>
                     <div className="flex gap-2 ">
                         <button
-                            className="bg-white border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-white hover:bg-[var(--color-primary)] "
+                            className=" border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-black hover:bg-[var(--color-primary)] "
                             onClick={() => carouselRef2.current.previous()}
                         >
                             <ArrowForwardIos  fontSize="inherit" />
                         </button>
                         <button
-                            className="bg-white border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-white hover:bg-[var(--color-primary)] smooth-transition"
+                            className=" border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-black hover:bg-[var(--color-primary)] smooth-transition"
                             onClick={() => carouselRef2.current.next()}
                         >
                             <ArrowForwardIos fontSize="inherit" />
@@ -225,13 +223,13 @@ function ProductsSection(props) {
                     {/* CONTROL BUTTONS */}
                     <div className="flex gap-2 ">
                         <button
-                            className="bg-white border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-white hover:bg-[var(--color-primary)] "
+                            className="  border-primary rotate-180 border cursor-pointer flex items-center justify-center  rounded-full shadow p-1 transition-all hover:text-black hover:bg-[var(--color-primary)] "
                             onClick={() => carouselRef3.current.previous()}
                         >
                             <ArrowForwardIos  fontSize="inherit" />
                         </button>
                         <button
-                            className="bg-white border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-white hover:bg-[var(--color-primary)]"
+                            className="  border-primary border cursor-pointer flex items-center  justify-center  rounded-full shadow p-1  transition-all hover:text-black hover:bg-[var(--color-primary)]"
                             onClick={() => carouselRef3.current.next()}
                         >
                             <ArrowForwardIos fontSize="inherit" />

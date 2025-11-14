@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Button} from "@mui/material";
 import RepeatIcon from '@mui/icons-material/Repeat';
 import Badge from '@mui/material/Badge';
@@ -7,21 +7,36 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Cart from "./Cart.jsx";
 import Tooltip from '@mui/material/Tooltip';
 import {useCart} from "../contexts/CartContext.jsx";
-import {googleLogout, useGoogleOneTapLogin, } from '@react-oauth/google';
+import {AuthContext} from "../contexts/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
-
 const Navbar = () => {
     const {showCart, setShowCart, cart} = useCart();
+    const { user, handleGoogleResponse, logout } = useContext(AuthContext);
+    const googleButtonRef = useRef(null);
     const navigate = useNavigate();
-    useGoogleOneTapLogin({
-        onSuccess: codeResponse => console.log(codeResponse),
-        onError: codeResponse => console.log(codeResponse),
-        flow: 'auth-code',
-    });
-    useEffect(() => {
-        googleLogout()
-    }, []);
 
+    useEffect(() => {
+        // Load Google Script
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+
+        script.onload = () => {
+            google.accounts.id.initialize({
+                client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+                callback: handleGoogleResponse,
+            });
+
+            if (!user && googleButtonRef.current) {
+                google.accounts.id.renderButton(googleButtonRef.current, {
+
+                });
+            }
+        };
+
+        document.body.appendChild(script);
+    }, [user]);
     return (
         <div className={`w-full py-5 bg-bg text-text  flex justify-between container`}>
             <div  className={`w-[30%] text-text `}>
@@ -31,10 +46,28 @@ const Navbar = () => {
                 <input type={"text"} placeholder={"Search Products Here..."} style={{outline:"none"}} className={`w-full rounded border-border border px-3 py-2`}/>
                 <Button variant="contained"  sx={{padding:"8px 20px", backgroundColor:"var(--color-primary)", ":hover":{backgroundColor:"black"}}}  >Search</Button>
             </div>
-            <div className={`w-[30%] flex justify-end `}>
-                <div className={`my-auto text-[13px] flex justify-end`}>
-                    <a className={`font-[500] px-3 hover:text-[var(--color-primary)] cursor-pointer border-r-1`} onClick={()=>useGoogleOneTapLogin}>Login</a>
-                    <a className={`font-[450] px-3 hover:text-[var(--color-primary)] cursor-pointer`}>Register</a>
+            <div className={`w-[40%] flex items-center justify-end `}>
+                <div className="right flex items-center gap-4">
+                    {/* If NOT logged in → show Google Button */}
+                    {!user && <div ref={googleButtonRef} ></div>}
+
+                    {/* If LOGGED IN → show profile + logout */}
+                    {user && (
+                        <div className="flex items-center justify-around gap-3 pr-3">
+                            <div
+                                style={{backgroundImage: `url(${user.picture})`}}
+                                className="w-8 h-8 rounded-full bg-no-repeat bg-contain"
+                            ></div>
+                            <span>{user.name}</span>
+
+                            <button
+                                onClick={logout}
+                                className=" rounded-md text-red-600 cursor-pointer  "
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    )}
                 </div>
                 <div className={`my-auto text-[13px] flex text-text gap-5`}>
                     <Badge

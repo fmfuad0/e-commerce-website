@@ -4,6 +4,7 @@
 body{
   font-family: 'Roboto', sans-serif;
   font-optical-sizing: auto;
+    scroll-behavior: smooth;
 }
 .detailsList li{
     list-style: square;

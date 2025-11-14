@@ -118,38 +118,45 @@ const CategoryBar = ({setVisible}) => {
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/smartphones')
+                              setHover(null)
                           }}
                     >Smartphones</span>
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/laptops')
+                              setHover(null)
                           }}
                     >Laptops</span>
 
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/accessories/headphone')
+                              setHover(null)
                           }}
                     >Headphones</span>
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/accessories/watch')
+                              setHover(null)
                           }}
                     >Watches</span>
 
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/mobile-accessories')
+                              setHover(null)
                           }}
                     >Accessories</span>
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/accessories/speaker')
+                              setHover(null)
                           }}
                     >Speaker</span>
                     <span className={` text-[#666] hover:text-[var(--color-primary)] hover:translate-x-2 cursor-pointer`}
                           onClick={()=>{
                               navigate('list-products/electronics/tablets')
+                              setHover(null)
                           }}
                     >Tablet</span>
 
@@ -166,7 +173,10 @@ const CategoryBar = ({setVisible}) => {
                         className="leading-5 cursor-pointer hover:text-[var(--color-primary)] transition-colors duration-200"
                         onMouseEnter={() => setHover(1)}
                         // onMouseLeave={() => setHover(null)}
-                        onClick={()=>navigate('/list-products/Fashion')}
+                        onClick={()=> {
+                            navigate('/list-products/Fashion');
+                            setHover(null)
+                        }}
                     >
                         FASHION
                     </li>
@@ -174,7 +184,10 @@ const CategoryBar = ({setVisible}) => {
                         className="leading-5 cursor-pointer hover:text-[var(--color-primary)] transition-colors duration-200"
                         onMouseEnter={() => setHover(2)}
                         // onMouseLeave={() => setHover(null)}
-                        onClick={()=>navigate('/list-products/electronics')}
+                        onClick={()=> {
+                            navigate('/list-products/electronics')
+                            setHover(null)
+                        }}
                     >
                         ELECTRONICS
                     </li>

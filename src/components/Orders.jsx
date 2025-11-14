@@ -14,14 +14,14 @@ const Orders = () => {
             ) : (
                 <div className="space-y-3">
                     {orders.map(o => (
-                        <div key={o.id} className="bg-white p-3 rounded shadow flex justify-between items-center">
+                        <div key={o.id} className=" p-3 rounded shadow flex justify-between items-center">
                             <div>
                                 <div className="font-medium">{o.id}</div>
                                 <div className="text-sm text-gray-500">{new Date(o.createdAt).toLocaleString()}</div>
                             </div>
                             <div className="text-right">
                                 <div className="font-semibold">${o.totalPayable.toFixed(2)}</div>
-                                <div className="text-sm text-gray-500">{o.status}</div>
+                                <div className="text-sm text-green-600 uppercase tracking-widest">{o.status}</div>
                                 <Link to={`/orders/${o.id}`} className="text-indigo-600 text-sm mt-1 inline-block">View</Link>
                             </div>
                         </div>
