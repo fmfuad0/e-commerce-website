@@ -188,5 +188,5 @@ Upcoming:
 
 - Developer: Md. Fartin Mahtadi Fuad   
 - Portfolio: portfolio-fm-fuad.netlify.app   
-- Email: fartinfuad@gamil.com  
-- GitHub:Link: https://github.com/fmfuad0"
+- Email: fartinfuad@gmail.com  
+- GitHub:Link: https://github.com/fmfuad0
