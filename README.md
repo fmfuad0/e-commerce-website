@@ -6,8 +6,8 @@ Live Website: https://classyshop-e-com-store.netlify.app
 
 <p align="center"> <img src="./src/assets/logo.png" style="background-color: white;" alt="ClassyShop Logo" width="200"/> </p> <p align="center"> <b>Fast • Modern • Responsive • Shopping Experience</b> </p> <p align="center"> <a href="https://classyshop-e-com-store.netlify.app"><img src="https://img.shields.io/badge/Live_Site-Visit_Now-brightgreen?style=for-the-badge"></a> <img src="https://img.shields.io/netlify/8d2b204e-e63d-40f9-8305-43052a3ac716?style=for-the-badge"> <img src="https://img.shields.io/github/license/yourusername/classyshop?style=for-the-badge"> <img src="https://img.shields.io/github/last-commit/fmfuad0/e-commerce-website?style=for-the-badge"> </p>
 
-![Portfolio Screenshot](https://github.com/fmfuad0/e-commerce-website/src/blob/master/assets/logo.png)
-![Portfolio Screenshot](https://github.com/fmfuad0/personal-portfolio/blob/master/screenshots/Screenshot-2.png)
+![Screenshot](https://github.com/fmfuad0/e-commerce-website/blob/main/screenshots/Screenshot-1.png)
+![Screenshot](https://github.com/fmfuad0/e-commerce-website/blob/main/screenshots/Screenshot-2.png)
 
 # Overview
 - ClassyShop is a fully responsive, modern e-commerce website built using React, Vite, Tailwind CSS, and Material UI Icons.  
