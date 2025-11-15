@@ -157,7 +157,7 @@ const Checkout = () => {
                         </div>
                         <div className="flex gap-2 mt-2">
                             <input value={couponCode} onChange={(e) => setCouponCode(e.target.value)} placeholder="Coupon code" className="flex-1 border p-2 rounded" />
-                            <button onClick={applyCoupon} className="    text-white px-3 rounded">Apply</button>
+                            <button onClick={applyCoupon} className=" bg-primary font-semibold text-white px-3 rounded">Apply</button>
                         </div>
 
                         <div className="flex justify-between font-semibold text-lg border-t pt-2">
@@ -165,7 +165,7 @@ const Checkout = () => {
                             <span>${(cart.discountedTotal + (shippingMethod === "express" ? 12.5 : 4.99) - (coupon?.type === "flat" ? coupon.value : coupon ? (cart.discountedTotal * coupon.value)/100 : 0)).toFixed(2)}</span>
                         </div>
 
-                        <button onClick={handlePlaceOrder} className="w-full mt-3 bg-blue-600 text-white py-2 rounded">Place Order</button>
+                        <button onClick={handlePlaceOrder} className="w-full mt-3 bg-primary text-white py-2 rounded">Place Order</button>
                     </div>
                 </div>
             </div>

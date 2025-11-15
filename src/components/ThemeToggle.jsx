@@ -9,12 +9,12 @@ const ThemeToggle = () => {
         <div className="flex items-center gap-2">
             <span className="text-sm">Theme:</span>
             <select
-                value={theme}
+                value={theme.toString()}
                 onChange={(e) => setTheme(e.target.value)}
                 className="border border-primary bg-bg text-text rounded-md px-1 focus:outline-none"
             >
                 {themes.map((t) => (
-                    <option key={t} value={t}>
+                    <option key={t} value={t} selected={theme===t}>
                         {t.charAt(0).toUpperCase() + t.slice(1)}
                     </option>
                 ))}

@@ -41,7 +41,6 @@ const Layout = ({ children }) => {
             <main className="flex-1  bg-bg text-text  w-full h-full bg-gray-50">
                 {children}
             </main>
-
             <Footer className="bg-gray-800 text-gray-200 py-4 text-center" />
         </div>
     );

@@ -4,15 +4,15 @@ import { useCart } from "../contexts/CartContext.jsx";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SkeletonOrderDetails from "../components/skeletons/SkeletonOrderDetails.jsx";
 import { downloadInvoiceFromNode, downloadInvoiceText } from "../utils/invoiceGenerator.js";
+import OrderTimeline from "../components/OrderTimeline.jsx";
 // import OrderTimeline from "../components/OrderTimeline.jsx";
 
 const OrderDetails = () => {
     const { id } = useParams();
-    const { orders } = useCart();
+    const { orders, setOrders } = useCart();
     const [isLoading, setIsLoading] = useState(true);
     const [order, setOrder] = useState(null);
     const nodeRef = useRef(null);
-
     useEffect(() => {
         setIsLoading(true);
         const t = setTimeout(() => {
@@ -36,29 +36,29 @@ const OrderDetails = () => {
     }
 
     return (
-        <div className="p-6 max-w-5xl mx-auto text-[var(--color-text)]">
+        <div className="p-6 max-w-6xl mx-auto text-[var(--color-text)]">
             <Link to="/orders" className="text-[var(--color-primary)] hover:underline text-sm inline-flex items-center gap-2">
                 <ArrowBackIosNewIcon sx={{ fontSize: "14px" }} /> Back to Orders
             </Link>
 
-            <div className="mt-4 mb-6 flex items-center justify-between">
+            <div className="mt-4 mb-6 flex items-center justify-between w-full">
                 <div>
-                    <h1 className="text-3xl font-bold">Order #{order.id}</h1>
+                    <h1 className="text-2xl font-bold">Order #{order.id}</h1>
                     <p className="text-gray-500 text-sm">{new Date(order.createdAt).toLocaleString()}</p>
                 </div>
 
                 <div className="flex items-center gap-3">
-                    {/*<OrderTimeline status={order.status} />*/}
+                    <OrderTimeline status={order.status} />
                     <button
                         onClick={() => downloadInvoiceFromNode(nodeRef.current, `invoice-${order.id}.pdf`)}
-                        className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg shadow hover:opacity-90"
+                        className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg shadow hover:opacity-90 cursor-pointer"
                     >
                         Download Invoice (Image)
                     </button>
 
                     <button
                         onClick={() => downloadInvoiceText(order, `invoice-${order.id}.pdf`)}
-                        className="px-4 py-2 border border-[var(--color-border)] rounded-lg"
+                        className="px-4 py-2 border border-[var(--color-border)] rounded-lg cursor-pointer"
                     >
                         Download Invoice (Text)
                     </button>

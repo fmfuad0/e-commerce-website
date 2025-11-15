@@ -14,9 +14,11 @@ const Orders = () => {
     }, [orders]);
 
     const statusColors = {
-        paid: "bg-[var(--color-success)]/15 text-[var(--color-success)]",
-        pending: "bg-[var(--color-accent)]/15 text-[var(--color-accent)]",
-        cancelled: "bg-[var(--color-danger)]/15 text-[var(--color-danger)]",
+        Paid: "bg-[var(--color-primary)]/15 text-[var(--color-primary)]",
+        Placed: "bg-[var(--color-primary)]/15 text-[var(--color-primary)]",
+        Shipped: "bg-[var(--color-accent)]/15 text-[var(--color-accent)]",
+        Delivered: "bg-[var(--color-success)]/15 text-[var(--color-success)]",
+        Cancelled: "bg-[var(--color-danger)]/15 text-[var(--color-danger)]",
     };
 
     return (
@@ -47,7 +49,7 @@ const Orders = () => {
                         >
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <div className="text-sm text-gray-400">Order ID</div>
+                                    <div className="text-sm text-secondary font-semibold">Order ID</div>
                                     <div className="text-lg font-semibold">{order.id}</div>
                                     <div className="text-sm mt-1 text-gray-500">
                                         {new Date(order.createdAt).toLocaleString()}

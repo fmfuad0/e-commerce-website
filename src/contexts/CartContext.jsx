@@ -137,7 +137,7 @@ export const CartProvider    = ({ children }) => {
             shippingAddress,
             shippingMethod,
             paymentMethod,
-            status: "pending", // pending -> paid -> fulfilled
+            status: "Paid", // pending -> paid -> fulfilled
         };
 
         // save order
@@ -165,6 +165,7 @@ export const CartProvider    = ({ children }) => {
                 orders,
                 createOrder,
                 markOrderPaid,
+                setOrders,
 
             }}
         >

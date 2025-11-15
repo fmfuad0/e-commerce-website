@@ -10,6 +10,9 @@ import Cart from "./components/Cart.jsx";
 import {CartProvider} from "./contexts/CartContext.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import {AuthProvider} from "./contexts/AuthContext.jsx";
+import Orders from "./pages/Orders.jsx";
+import OrderDetails from "./pages/OrderDetails.jsx";
+import AdminOrders from "./pages/AdminOrders.jsx";
 
 
 export default function App() {
@@ -30,7 +33,8 @@ export default function App() {
                                     <Route path="/cart" element={<Cart/>} />
                                     <Route path="/checkout" element={<Checkout />} />
                                     <Route path="/orders" element={<Orders />} />
-                                    <Route path="/orders/:id" element={<OrderConfirmation />} />
+                                    <Route path="/orders/:id" element={<OrderDetails />} />
+                                    <Route path="/admin" element={<AdminOrders />} />
                                     {/*<Route path="/products" element={<span>Products</span>} />*/}
                                 </Routes>
                             </Layout>

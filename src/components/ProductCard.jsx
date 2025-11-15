@@ -88,7 +88,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 {/* --- Discount and New Tags with Slide-in Animation --- */}
                 <div
                     id="discount-tag"
-                    className=" absolute bg-red-500 top-3 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
+                    className=" absolute bg-red-500 text-gray-100 top-3 left-2 w-[55px] text-xs font-bold py-1 rounded-sm transition-all duration-300 ease-in-out"
                 >
                     {product.discountPercentage}%
                 </div>
@@ -140,7 +140,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
 
             {/* --- Product Info --- */}
             <div className="px-2 flex flex-col gap-1 mt-1">
-                <h1 className=" w-full h-[30px] items-end flex hover:text-[var(--color-primary)] cursor-pointer font-semibold text-xs">
+                <h1 className=" w-full h-[30px] items-end flex hover:text-[var(--color-primary)] text-secondary font-semibold cursor-pointer text-xs">
                     {product.brand}
                 </h1>
                 <h1 className="font-[600] h-[30px] w-full flex items-center text-sm">{product.title}</h1>
@@ -152,7 +152,7 @@ const  ProductCard = ({ product, direction, setIsLoading })=> {
                 </div>}
 
                 <div className="flex gap-2 w-full flex-row">
-                    <h1 className="font-semibold text-sm  line-through text-center">
+                    <h1 className="font-semibold text-red-500 text-sm  line-through text-center">
                         ${((product.price * product.discountPercentage / 100) + product.price).toFixed(2)}
                     </h1>
                     <h1 className="font-semibold w-full text-sm text-primary">

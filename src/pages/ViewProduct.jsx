@@ -13,6 +13,7 @@ import { latestProducts } from "../assets/resources/products/products.js";
 import ProductCard from "../components/ProductCard.jsx";
 import { useCart } from "../contexts/CartContext.jsx";
 import { useParams, useNavigate } from "react-router-dom";
+import ViewImages from "../components/ViewImages.jsx";
 
 const ViewProduct = () => {
     const { productId } = useParams();
@@ -25,6 +26,9 @@ const ViewProduct = () => {
     const [isLoading, setIsLoading] = useState(true);
     const carouselRef = useRef(null);
     const carouselRef2 = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [images, setImages] = useState([]);
+    const [visible, setVisible] = useState(false);
     const responsive = {
         desktop: { breakpoint: { max: 3000, min: 1024 }, items: 6 },
         tablet: { breakpoint: { max: 1024, min: 464 }, items: 3 },
@@ -55,17 +59,22 @@ const ViewProduct = () => {
         window.scrollTo(0, 0);
         setTimeout(()=>setIsLoading(false), 1000);
     }, [productId]);
-
+    const onClose = ()=>{setVisible(false);};
     return (
         <div className="container bg-bg text-text ">
             {!isLoading?
                 <div className={`flex h-full py-10 w-full`}>
-
+                    {visible && <ViewImages images={images} index={currentIndex} onClose={onClose}/>}
                     <div className={`flex flex-col gap-5 my-10 px-5 items-center justify-start`}>
-                        {product.images.map(image => (
+                        {product.images.map((image, index) => (
                             <img src={image} alt=""
                                  className={`w-30 border border-gray-300 ${mainImage === image ? "border-accent" : ""}`}
-                                 onClick={() => setMainImage(image)}/>
+                                 onClick={() => {
+                                     setMainImage(image);
+                                     setImages(product.images);
+                                     setCurrentIndex(index);
+                                     setVisible(true);
+                                 }}/>
                         ))}
                     </div>
                     <div className={`flex items-start justify-between gap-7`}>
@@ -76,27 +85,27 @@ const ViewProduct = () => {
                             <div className={`flex flex-col gap-2 border-b-1 border-b-gray-300 pb-2`}>
                                 <Rating defaultValue={product.rating} readOnly precision={0.5}/>
                                 <h1 className={`text-2xl font-[500]`}>{product.title}</h1>
-                                <p className="text-sm font-[500] text-gray-700 w-[80%] leading-7">{product.description}</p>
+                                <p className="text-sm font-[500] text-secondary w-[80%] leading-7">{product.description}</p>
                             </div>
                             <div className={`flex flex-col text-[14px] gap-1 pb-2 tracking-wider`}>
                             <span className={`flex`}>
-                                <span className={`font-[500]`}>Brand :</span><h1 className={`ml-1`}>{product.brand}</h1>
+                                <span className={`font-[500]`}>Brand :</span><h1 className={`ml-1 text-secondary`}>{product.brand}</h1>
                             </span>
                                 <span className={`flex`}>
                                 <span className={`font-[500]`}>Availability :</span><h1
-                                    className={`ml-1`}>{product.availabilityStatus}</h1>
+                                    className={`ml-1 text-secondary`}>{product.availabilityStatus}</h1>
                             </span>
                                 <span className={`flex`}>
                                 <span className={`font-[500]`}>Warranty :</span><h1
-                                    className={`ml-1`}>{product.warrantyInformation}</h1>
+                                    className={`ml-1 text-secondary`}>{product.warrantyInformation}</h1>
                             </span>
                                 <span className={`flex`}>
                                 <span className={`font-[500]`}>Shipping  :</span><h1
-                                    className={`ml-1`}>{product.shippingInformation}</h1>
+                                    className={`ml-1 text-secondary`}>{product.shippingInformation}</h1>
                             </span>
                                 <span className={`flex`}>
                                 <span className={`font-[500]`}>Return Policy  :</span><h1
-                                    className={`ml-1`}>{product.returnPolicy}</h1>
+                                    className={`ml-1 text-secondary`}>{product.returnPolicy}</h1>
                             </span>
                                 <h1 className={`font-[600] mt-2`}>Hurry up ! Only <span
                                     className={`text-red-500`}>{product.stock}</span> items left...</h1>
@@ -167,27 +176,21 @@ const ViewProduct = () => {
                         className={` bg-bg text-text  border border-gray-300 tracking-widest rounded-md text-[14px] font-[500] p-10 leading-5`}
                     >
                         <h1 className={`text-lg`}>Product Description : </h1>
-                        <p className={`text-center my-5`}>The best is yet to come! Give your walls a voice with a framed
-                            poster. This aesthethic, optimistic poster will look great in your desk or in an open-space
-                            office. Painted wooden frame with passe-partout for more depth. We denounce with righteous
-                            indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of
-                            the
-                            moment, so blinded by desire that they cannot forese deleniti atque corrupti quos dolores et
-                            quas molestias excepturi.</p>
+                        <p className={`text-center my-5 text-secondary`}>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth. We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire that they cannot forese deleniti atque corrupti quos dolores et quas molestias excepturi.</p>
                         <p className={`font-bold my-2`}>Lorem Ipsum is not simply random text</p>
-                        <p className={`my-4`}>Many desktop publishing packages and web page editors now use Lorem Ipsum
+                        <p className={`my-4 text-secondary`}>Many desktop publishing packages and web page editors now use Lorem Ipsum
                             as
                             their default model text, and a search for 'lorem ipsum' will uncover many web sites still
                             in
                             their infancy. Various versions have evolved over the years, sometimes by accident,
                             sometimes on
                             purpose (injected humour and the like).</p>
-                        <p className={`my-4`}>Fashion has been creating well-designed collections since 2010. The brand
+                        <p className={`my-4 text-secondary`}>Fashion has been creating well-designed collections since 2010. The brand
                             offers feminine designs delivering stylish separates and statement dresses which has since
                             evolved into a full ready-to-wear collection in which every item is a vital part of a
                             woman's
                             wardrobe. The result? Cool, easy, chic looks with youthful elegance.</p>
-                        <ul className={`detailsList  px-7 mt-5 flex flex-col gap-1`}>
+                        <ul className={`detailsList text-secondary px-7 mt-5 flex flex-col gap-1`}>
                             <li>Bomber jacket</li>
                             <li>Black colourway</li>
                             <li>Ribbed high neckline Knit waistband cuffs and collar</li>
