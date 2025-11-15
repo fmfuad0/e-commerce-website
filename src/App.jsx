@@ -13,6 +13,7 @@ import {AuthProvider} from "./contexts/AuthContext.jsx";
 import Orders from "./pages/Orders.jsx";
 import OrderDetails from "./pages/OrderDetails.jsx";
 import AdminOrders from "./pages/AdminOrders.jsx";
+import logo from './assets/logo.png'
 
 
 export default function App() {
@@ -35,7 +36,7 @@ export default function App() {
                                     <Route path="/orders" element={<Orders />} />
                                     <Route path="/orders/:id" element={<OrderDetails />} />
                                     <Route path="/admin" element={<AdminOrders />} />
-                                    {/*<Route path="/products" element={<span>Products</span>} />*/}
+                                    <Route path="/logo.png" element={<img src={logo} alt={'logo'} />} />
                                 </Routes>
                             </Layout>
                         </BrowserRouter>
